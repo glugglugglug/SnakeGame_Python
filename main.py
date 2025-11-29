@@ -19,6 +19,17 @@ class GameState(enum.Enum):
     GAME_OVER = 1
 
 
+# level class that handles drawing the level(walls)
+class Level:
+    def __init__(self):
+        self.tm = 0
+        self.u = 0
+        self.v = 0
+        self.w = 192
+        self.h = 128
+
+    def draw(self):
+        pyxel.bltm(0, 0, self.tm, self.u, self.v, self.w, self.h)
 
 
 #class for apple that handles drawing and moving it
@@ -114,6 +125,9 @@ class App():
         #gamestate variables
         self.cur_game_state = GameState.RUNNING
 
+        #level 
+        self.level = Level()
+
         #Store the snake sections
         self.snake = []
 
@@ -187,6 +201,7 @@ class App():
 
     def draw(self):
         pyxel.cls(0)
+        self.level.draw()
         self.apple.draw()
         
         #going through each peice of snake and drawing them
