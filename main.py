@@ -112,7 +112,52 @@ class SnakeSec:
         
         return is_intersected
 
-                
+
+
+#helper func for calc start x value for centred text
+def center_text(text, page_width, char_width = pyxel.FONT_WIDTH):
+    text_width = len(text) * char_width
+    return (page_width - text_width) / 2
+
+
+#helper func for calc start x value for right aligned text
+def right_text(text, page_width, char_width = pyxel.FONT_WIDTH):
+    text_width = len(text) * char_width
+    return page_width - (text_width + char_width) 
+
+# handles drawing text and scores-
+class Hud:
+    def __init__(self):
+        self.title_text = "SnakeGame :P"
+        self.title_text_x = center_text(self.title_text,196)
+        self.score_text = str(0)
+        self.score_text_x = right_text(self.score_text,196)
+        self.level_text = "lvl 0"
+        self.level_text_x = 10
+        self.apples_text = "Apples "
+        self.apples_text_x = len(self.level_text) * pyxel.FONT_WIDTH + self.level_text_x + 10
+
+    def draw_title(self):
+        pyxel.rect(self.title_text_x -1, 0, len(self.title_text) * pyxel.FONT_WIDTH +1, pyxel.FONT_HEIGHT +1, 1)
+        pyxel.text(self.title_text_x, 1, self.title_text, 12)
+
+    def draw_score(self, score):
+        self.score_text = str(score)
+        self.score_text_x = right_text(self.score_text, 196)
+        pyxel.rect(self.score_text_x - 11, 0, len(self.score_text) * pyxel.FONT_WIDTH +1, pyxel.FONT_HEIGHT +1, 1)
+        pyxel.text(self.score_text_x - 10, 1, self.score_text, 3)
+
+    def draw_level(self, level):
+        self.level_text = "Level " + str(level)
+        pyxel.rect(self.level_text_x -1, 0, len(self.level_text) * pyxel.FONT_WIDTH +1, pyxel.FONT_HEIGHT +1, 1)
+        pyxel.text(self.level_text_x, 1, self.level_text, 3)
+
+    def draw_apples(self, apples):
+        self.apples_text = "Apples " + str(apples)
+        pyxel.rect(self.apples_text_x -1, 0, len(self.apples_text) * pyxel.FONT_WIDTH +1, pyxel.FONT_HEIGHT +1, 1)
+        pyxel.text(self.apples_text_x, 1, self.apples_text, 8)
+
+    
             
 class App():
     #constructor of the class
@@ -127,6 +172,9 @@ class App():
 
         #level 
         self.level = Level()
+
+        #texts
+        self.hud = Hud()
 
         #Store the snake sections
         self.snake = []
@@ -147,6 +195,12 @@ class App():
         self.time_last_frame = time.time()
         self.delta_time = 0
         self.time_since_last_move = 0
+
+        #quantifying vars score levels apples etc
+        self.score = 0
+        self.apples_eaten_this_level = 0
+        self.apples_eaten_total = 0
+        self.cur_level = 1
         
         #for input queue - using a deque, pop from front and back - stores direction changes
         self.input_queue = collections.deque()
@@ -169,6 +223,7 @@ class App():
                 self.time_since_last_move = 0
                 self.move_snake()
                 self.check_collision()
+                self.score += len(self.snake) * self.apples_eaten_total + 1
                 
     def start_new_game(self):
         self.cur_game_state = GameState.RUNNING
@@ -197,6 +252,12 @@ class App():
         #move apple again
         self.move_apple() 
 
+        #quantifying vars score levels apples etc
+        self.score = 0
+        self.apples_eaten_this_level = 0
+        self.apples_eaten_total = 0
+        self.cur_level = 1
+
 
 
     def draw(self):
@@ -208,6 +269,12 @@ class App():
         for s in self.snake:
             s.draw(self.snake_direction)
 
+        #draw title and other text
+        self.hud.draw_title()
+        self.hud.draw_score(self.score)
+        self.hud.draw_level(self.cur_level)
+        self.hud.draw_apples(self.apples_eaten_total)
+
         #show game over
         pyxel.text(10, 114, str(self.cur_game_state), 12)
     
@@ -218,6 +285,8 @@ class App():
             self.speed += (self.speed * 0.1)
             self.sec_to_add += 4
             self.move_apple()
+            self.apples_eaten_total += 1
+            self.apples_eaten_this_level += 1
 
         #snakehead into snake intersection
         for s in self.snake:
@@ -226,6 +295,17 @@ class App():
             if s.intersects(self.snake[0].x, self.snake[0].y, self.snake[0].w, self.snake[0].h):
                 #end the game
                 self.cur_game_state = GameState.GAME_OVER
+
+        #snake wall intersection
+
+        #debug
+        #tx = self.snake[0].x // 8
+        #ty = self.snake[0].y // 8
+        #tile_value = pyxel.tilemaps[0].pget(tx, ty)  #needed to show value as a tuple ;-;
+        #print(f"Snake at ({tx}, {ty}), tile={tile_value}")
+
+        if pyxel.tilemaps[0].pget(self.snake[0].x / 8, self.snake[0].y / 8) == (3,0):
+            self.cur_game_state = GameState.GAME_OVER
 
     def move_apple(self):
         #select new random location for apple
