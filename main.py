@@ -275,8 +275,8 @@ class App():
         self.hud.draw_level(self.cur_level)
         self.hud.draw_apples(self.apples_eaten_total)
 
-        #show game over
-        pyxel.text(10, 114, str(self.cur_game_state), 12)
+        #show game over _ debug
+        # pyxel.text(10, 114, str(self.cur_game_state), 12)
     
     #checks all collisions
     def check_collision(self):
