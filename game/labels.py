@@ -24,3 +24,9 @@ class Colour:
     WHITE = 7
     PINK = 8
     GREY = 13
+    ORANGE = 9
+    BLUE = 1
+    LIGHT_BLUE = 6
+    MID_BLUE = 12
+    BROWN = 4
+    PEACH = 15

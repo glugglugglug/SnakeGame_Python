@@ -143,9 +143,9 @@ class App():
             s.draw(self.snake_direction)
 
         #draw title and other text
-        self.hud.draw_title()
+        self.hud.draw_title(self.cur_level)
         self.hud.draw_score(self.score)
-        self.hud.draw_level(self.cur_level)
+        #self.hud.draw_level(self.cur_level)
         self.hud.draw_apples(self.apples_eaten_total)
 
         #show game over _ debug

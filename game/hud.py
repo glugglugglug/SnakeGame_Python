@@ -1,5 +1,5 @@
 import pyxel
-from game import helpers
+from game import helpers, levels, start
 
 
 
@@ -15,17 +15,23 @@ class Hud:
         self.level_text = "lvl 0"
         self.level_text_x = 10
         self.apples_text = "Apples "
-        self.apples_text_x = len(self.level_text) * pyxel.FONT_WIDTH + self.level_text_x + 10
+        self.apples_text_x = helpers.right_text(self.apples_text, self.page_width)
 
-    def draw_title(self):
+    def draw_title(self, level):
+        levels=[
+            "This is SNAKE",
+            "This is LADDER",
+            "This is LIFE",
+        ]
+        self.title_text = levels[level-1]
         pyxel.rect(self.title_text_x -1, 0, len(self.title_text) * pyxel.FONT_WIDTH +1, pyxel.FONT_HEIGHT +1, 1)
         pyxel.text(self.title_text_x, 1, self.title_text, 12)
 
     def draw_score(self, score):
         self.score_text = str(score)
         self.score_text_x = helpers.right_text(self.score_text, 196)
-        pyxel.rect(self.score_text_x - 11, 0, len(self.score_text) * pyxel.FONT_WIDTH +1, pyxel.FONT_HEIGHT +1, 1)
-        pyxel.text(self.score_text_x - 10, 1, self.score_text, 3)
+        pyxel.rect(self.score_text_x - 2, 0, len(self.score_text) * pyxel.FONT_WIDTH +1, pyxel.FONT_HEIGHT +1, 1)
+        pyxel.text(self.score_text_x -1, 1, self.score_text, 3)
 
     def draw_level(self, level):
         self.level_text = "Level " + str(level)
@@ -34,5 +40,5 @@ class Hud:
 
     def draw_apples(self, apples):
         self.apples_text = "Apples " + str(apples)
-        pyxel.rect(self.apples_text_x -1, 0, len(self.apples_text) * pyxel.FONT_WIDTH +1, pyxel.FONT_HEIGHT +1, 1)
-        pyxel.text(self.apples_text_x, 1, self.apples_text, 8)
+        pyxel.rect(self.apples_text_x - 2, 128 - pyxel.FONT_HEIGHT - 2, len(self.apples_text) * pyxel.FONT_WIDTH +1, pyxel.FONT_HEIGHT +1, 1)
+        pyxel.text(self.apples_text_x -1, 1 + 128 - pyxel.FONT_HEIGHT - 2, self.apples_text, 8)

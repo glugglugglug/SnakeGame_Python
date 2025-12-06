@@ -18,16 +18,19 @@ def start_menu(self):
     self.game_name_y = helpers.arrange_text_y(self.game_name, self.h, 6) 
     
     padding = 5
-    pyxel.rect(self.game_name_x - padding, self.game_name_y, len(self.game_name) * pyxel.FONT_WIDTH + padding * 2, pyxel.FONT_HEIGHT + padding * 2, labels.Colour.WHITE)
+    pyxel.rect(self.game_name_x - padding, self.game_name_y, len(self.game_name) * pyxel.FONT_WIDTH + padding * 2, pyxel.FONT_HEIGHT + padding * 2, labels.Colour.LIGHT_BLUE)
     #shadow ig
-    pyxel.rect(self.game_name_x - padding, self.game_name_y + pyxel.FONT_HEIGHT + padding * 2 - 2, len(self.game_name) * pyxel.FONT_WIDTH + padding * 2, 2, labels.Colour.GREY)
-    pyxel.rect(self.game_name_x - padding + len(self.game_name) * pyxel.FONT_WIDTH + padding * 2 - 2, self.game_name_y, 2, pyxel.FONT_HEIGHT + padding * 2 , labels.Colour.GREY)
-    pyxel.text(self.game_name_x, self.game_name_y + padding, self.game_name, labels.Colour.PINK)
+    pyxel.rect(self.game_name_x - padding, self.game_name_y + pyxel.FONT_HEIGHT + padding * 2 - 2, len(self.game_name) * pyxel.FONT_WIDTH + padding * 2, 2, labels.Colour.MID_BLUE)
+    pyxel.rect(self.game_name_x - padding + len(self.game_name) * pyxel.FONT_WIDTH + padding * 2 - 2, self.game_name_y, 2, pyxel.FONT_HEIGHT + padding * 2 , labels.Colour.MID_BLUE)
+    pyxel.text(self.game_name_x, self.game_name_y + padding, self.game_name, labels.Colour.WHITE)
 
     #pyxel.text(60, 30, "SNAKE GAME", labels.Colour.BLACK)
 
     #level buttons
 
+    shadow_col = labels.Colour.ORANGE
+    back_col = labels.Colour.YELLOW
+    text_col = labels.Colour.WHITE
     self.space_bw_y = 20
     self.level_1 = "This is SNAKE"
     self.level_2 = "This is LADDER"
@@ -36,53 +39,53 @@ def start_menu(self):
     self.first_x = helpers.center_text(self.level_1, self.w) - 17
     self.first_y = helpers.arrange_text_y(self.level_1, self.h, 8) * 3
 
-    pyxel.rect(self.first_x - padding, self.first_y, len("1") * pyxel.FONT_WIDTH + padding * 2 + 2, pyxel.FONT_HEIGHT + padding * 2, labels.Colour.WHITE)
+    pyxel.rect(self.first_x - padding, self.first_y, len("1") * pyxel.FONT_WIDTH + padding * 2 + 2, pyxel.FONT_HEIGHT + padding * 2, back_col)
     #shadow for box
-    pyxel.rect(self.first_x - padding, self.first_y + pyxel.FONT_HEIGHT + padding * 2 - 2, len("1") * pyxel.FONT_WIDTH + padding * 2, 2, labels.Colour.GREY)
-    pyxel.rect(self.first_x - padding + len("1") * pyxel.FONT_WIDTH + padding * 2 - 2 + 2, self.first_y, 2, pyxel.FONT_HEIGHT + padding * 2, labels.Colour.GREY)
-    pyxel.text(self.first_x + 1, self.first_y + padding, "1", labels.Colour.PINK)
+    pyxel.rect(self.first_x - padding, self.first_y + pyxel.FONT_HEIGHT + padding * 2 - 2, len("1") * pyxel.FONT_WIDTH + padding * 2, 2, shadow_col)
+    pyxel.rect(self.first_x - padding + len("1") * pyxel.FONT_WIDTH + padding * 2 - 2 + 2, self.first_y, 2, pyxel.FONT_HEIGHT + padding * 2, shadow_col)
+    pyxel.text(self.first_x + 1, self.first_y + padding, "1", text_col)
 
     self.first_text_x = self.first_x + 30
 
-    pyxel.rect(self.first_text_x - padding, self.first_y, len(self.level_1) * pyxel.FONT_WIDTH + padding * 2 + 2, pyxel.FONT_HEIGHT + padding * 2, labels.Colour.WHITE)
+    pyxel.rect(self.first_text_x - padding, self.first_y, len(self.level_1) * pyxel.FONT_WIDTH + padding * 2 + 2, pyxel.FONT_HEIGHT + padding * 2, back_col)
     #shadow for box
-    pyxel.rect(self.first_text_x - padding, self.first_y + pyxel.FONT_HEIGHT + padding * 2 - 2, len(self.level_1) * pyxel.FONT_WIDTH + padding * 2, 2, labels.Colour.GREY)
-    pyxel.rect(self.first_text_x - padding + len(self.level_1) * pyxel.FONT_WIDTH + padding * 2 - 2 + 2, self.first_y, 2, pyxel.FONT_HEIGHT + padding * 2, labels.Colour.GREY)
-    pyxel.text(self.first_text_x + 1, self.first_y + padding, self.level_1, labels.Colour.PINK)
+    pyxel.rect(self.first_text_x - padding, self.first_y + pyxel.FONT_HEIGHT + padding * 2 - 2, len(self.level_1) * pyxel.FONT_WIDTH + padding * 2, 2, shadow_col)
+    pyxel.rect(self.first_text_x - padding + len(self.level_1) * pyxel.FONT_WIDTH + padding * 2 - 2 + 2, self.first_y, 2, pyxel.FONT_HEIGHT + padding * 2, shadow_col)
+    pyxel.text(self.first_text_x + 1, self.first_y + padding, self.level_1, text_col)
 
     #second button</3
     self.first_y += self.space_bw_y
 
-    pyxel.rect(self.first_x - padding, self.first_y, len("2") * pyxel.FONT_WIDTH + padding * 2 + 2, pyxel.FONT_HEIGHT + padding * 2, labels.Colour.WHITE)
+    pyxel.rect(self.first_x - padding, self.first_y, len("2") * pyxel.FONT_WIDTH + padding * 2 + 2, pyxel.FONT_HEIGHT + padding * 2, back_col)
     #shadow for box
-    pyxel.rect(self.first_x - padding, self.first_y + pyxel.FONT_HEIGHT + padding * 2 - 2, len("2") * pyxel.FONT_WIDTH + padding * 2, 2, labels.Colour.GREY)
-    pyxel.rect(self.first_x - padding + len("2") * pyxel.FONT_WIDTH + padding * 2 - 2 + 2, self.first_y, 2, pyxel.FONT_HEIGHT + padding * 2, labels.Colour.GREY)
-    pyxel.text(self.first_x + 1, self.first_y + padding, "2", labels.Colour.PINK)
+    pyxel.rect(self.first_x - padding, self.first_y + pyxel.FONT_HEIGHT + padding * 2 - 2, len("2") * pyxel.FONT_WIDTH + padding * 2, 2, shadow_col)
+    pyxel.rect(self.first_x - padding + len("2") * pyxel.FONT_WIDTH + padding * 2 - 2 + 2, self.first_y, 2, pyxel.FONT_HEIGHT + padding * 2, shadow_col)
+    pyxel.text(self.first_x + 1, self.first_y + padding, "2", text_col)
 
     self.first_text_x = self.first_x + 30
 
-    pyxel.rect(self.first_text_x - padding, self.first_y, len(self.level_2) * pyxel.FONT_WIDTH + padding * 2 + 2, pyxel.FONT_HEIGHT + padding * 2, labels.Colour.WHITE)
+    pyxel.rect(self.first_text_x - padding, self.first_y, len(self.level_2) * pyxel.FONT_WIDTH + padding * 2 + 2, pyxel.FONT_HEIGHT + padding * 2, back_col)
     #shadow for box
-    pyxel.rect(self.first_text_x - padding, self.first_y + pyxel.FONT_HEIGHT + padding * 2 - 2, len(self.level_2) * pyxel.FONT_WIDTH + padding * 2, 2, labels.Colour.GREY)
-    pyxel.rect(self.first_text_x - padding + len(self.level_2) * pyxel.FONT_WIDTH + padding * 2 - 2 + 2, self.first_y, 2, pyxel.FONT_HEIGHT + padding * 2, labels.Colour.GREY)
-    pyxel.text(self.first_text_x + 1, self.first_y + padding, self.level_2, labels.Colour.PINK)
+    pyxel.rect(self.first_text_x - padding, self.first_y + pyxel.FONT_HEIGHT + padding * 2 - 2, len(self.level_2) * pyxel.FONT_WIDTH + padding * 2, 2, shadow_col)
+    pyxel.rect(self.first_text_x - padding + len(self.level_2) * pyxel.FONT_WIDTH + padding * 2 - 2 + 2, self.first_y, 2, pyxel.FONT_HEIGHT + padding * 2, shadow_col)
+    pyxel.text(self.first_text_x + 1, self.first_y + padding, self.level_2, text_col)
 
     #third button ;-;
     self.first_y += self.space_bw_y
 
-    pyxel.rect(self.first_x - padding, self.first_y, len("3") * pyxel.FONT_WIDTH + padding * 2 + 2, pyxel.FONT_HEIGHT + padding * 2, labels.Colour.WHITE)
+    pyxel.rect(self.first_x - padding, self.first_y, len("3") * pyxel.FONT_WIDTH + padding * 2 + 2, pyxel.FONT_HEIGHT + padding * 2, back_col)
     #shadow for box
-    pyxel.rect(self.first_x - padding, self.first_y + pyxel.FONT_HEIGHT + padding * 2 - 2, len("3") * pyxel.FONT_WIDTH + padding * 2, 2, labels.Colour.GREY)
-    pyxel.rect(self.first_x - padding + len("3") * pyxel.FONT_WIDTH + padding * 2 - 2 + 2, self.first_y, 2, pyxel.FONT_HEIGHT + padding * 2, labels.Colour.GREY)
-    pyxel.text(self.first_x + 1, self.first_y + padding, "3", labels.Colour.PINK)
+    pyxel.rect(self.first_x - padding, self.first_y + pyxel.FONT_HEIGHT + padding * 2 - 2, len("3") * pyxel.FONT_WIDTH + padding * 2, 2, shadow_col)
+    pyxel.rect(self.first_x - padding + len("3") * pyxel.FONT_WIDTH + padding * 2 - 2 + 2, self.first_y, 2, pyxel.FONT_HEIGHT + padding * 2, shadow_col)
+    pyxel.text(self.first_x + 1, self.first_y + padding, "3", text_col)
 
     self.first_text_x = self.first_x + 30
 
-    pyxel.rect(self.first_text_x - padding, self.first_y, len(self.level_3) * pyxel.FONT_WIDTH + padding * 2 + 2, pyxel.FONT_HEIGHT + padding * 2, labels.Colour.WHITE)
+    pyxel.rect(self.first_text_x - padding, self.first_y, len(self.level_3) * pyxel.FONT_WIDTH + padding * 2 + 2, pyxel.FONT_HEIGHT + padding * 2, back_col)
     #shadow for box
-    pyxel.rect(self.first_text_x - padding, self.first_y + pyxel.FONT_HEIGHT + padding * 2 - 2, len(self.level_3) * pyxel.FONT_WIDTH + padding * 2, 2, labels.Colour.GREY)
-    pyxel.rect(self.first_text_x - padding + len(self.level_3) * pyxel.FONT_WIDTH + padding * 2 - 2 + 2, self.first_y, 2, pyxel.FONT_HEIGHT + padding * 2, labels.Colour.GREY)
-    pyxel.text(self.first_text_x + 1, self.first_y + padding, self.level_3, labels.Colour.PINK)
+    pyxel.rect(self.first_text_x - padding, self.first_y + pyxel.FONT_HEIGHT + padding * 2 - 2, len(self.level_3) * pyxel.FONT_WIDTH + padding * 2, 2, shadow_col)
+    pyxel.rect(self.first_text_x - padding + len(self.level_3) * pyxel.FONT_WIDTH + padding * 2 - 2 + 2, self.first_y, 2, pyxel.FONT_HEIGHT + padding * 2, shadow_col)
+    pyxel.text(self.first_text_x + 1, self.first_y + padding, self.level_3, text_col)
 
 
     #pyxel.text(70, 60, "1 - LEVEL 1", pyxel.COLOR_WHITE)
