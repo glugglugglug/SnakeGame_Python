@@ -14,9 +14,13 @@ class Direction(enum.Enum):
 class GameState(enum.Enum):
     RUNNING = 0
     GAME_OVER = 1
+    START_MENU = 2
 
 
 #colour labels
 class Colour:
     BLACK = 0
     YELLOW = 10
+    WHITE = 7
+    PINK = 8
+    GREY = 13

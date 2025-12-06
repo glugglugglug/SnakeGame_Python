@@ -8,9 +8,10 @@ from game import helpers
 class Hud:
     def __init__(self):
         self.title_text = "SnakeGame :P"
-        self.title_text_x = helpers.center_text(self.title_text,196)
+        self.page_width = 192
+        self.title_text_x = helpers.center_text(self.title_text, self.page_width)
         self.score_text = str(0)
-        self.score_text_x = helpers.right_text(self.score_text,196)
+        self.score_text_x = helpers.right_text(self.score_text, self.page_width)
         self.level_text = "lvl 0"
         self.level_text_x = 10
         self.apples_text = "Apples "

@@ -1,5 +1,5 @@
 import pyxel
-from game import labels, levels, snake, apple, hud, input
+from game import labels, levels, snake, apple, hud, controls, start
 import time
 import collections
 import random
@@ -9,7 +9,9 @@ class App():
     #constructor of the class
     def __init__(self):
         scale = 4
-        pyxel.init(192, 128, display_scale=scale, capture_scale=scale, title="Snake Game :P", fps=60)
+        page_w = 192
+        page_h = 128
+        pyxel.init(page_w, page_h, display_scale=scale, capture_scale=scale, title="Snake Game :P", fps=60)
         pyxel.load("assets/resources.pyxres")
 
         #quantifying vars score levels apples etc
@@ -25,7 +27,7 @@ class App():
         self.apple = apple.Apple(64, 32, self.sprite_apple)
 
         #gamestate variables
-        self.cur_game_state = labels.GameState.RUNNING
+        self.cur_game_state = labels.GameState.START_MENU
 
         #level 
         self.level = levels.Level(self.level_data)
@@ -73,7 +75,7 @@ class App():
         self.time_since_last_move += self.delta_time
         
         #queue-ing up player moves
-        input.check_input(self)
+        controls.check_input(self)
     
         #check game state first and then see if its time to move
         if self.cur_game_state == labels.GameState.RUNNING:
@@ -117,8 +119,21 @@ class App():
         self.cur_level = 1
 
 
+    def start_level(self, level_num):
+        self.cur_level = level_num
+        self.level_data = levels.LEVELS[level_num - 1]
+
+        self.start_new_game()
+        self.cur_game_state = labels.GameState.RUNNING
 
     def draw(self):
+        
+        #drawing start menu
+        if self.cur_game_state == labels.GameState.START_MENU:
+            start.start_menu(self)
+            return
+        
+        #if game is running
         pyxel.cls(labels.Colour.YELLOW)
         self.level.draw()
         self.apple.draw()
