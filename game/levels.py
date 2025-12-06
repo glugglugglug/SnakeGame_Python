@@ -1,4 +1,5 @@
 import pyxel
+from game import labels
 
 
 #stores data for each level
@@ -16,12 +17,10 @@ LEVELS = [
 
 #handles the levels of a class
 class Level:
-    def __init__(self):
-        self.tm = 0
-        self.u = 0
-        self.v = 0
+    def __init__(self, leveldata):
+        self.data = leveldata
         self.w = 192
         self.h = 128
 
     def draw(self):
-        pyxel.bltm(0, 0, self.tm, self.u, self.v, self.w, self.h)
+        pyxel.bltm(0, 0, self.data.tm, 0, 0, self.w, self.h,labels.Colour.BLACK)
