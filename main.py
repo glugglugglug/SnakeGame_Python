@@ -29,7 +29,7 @@ class App():
         #gamestate variables
         self.cur_game_state = labels.GameState.START_MENU
 
-        #level 
+        #level     
         self.level = levels.Level(self.level_data)
 
         #texts
