@@ -1,5 +1,5 @@
 import pyxel
-from game import labels, levels, snake, apple, hud, controls, start
+from game import labels, levels, snake, apple, hud, controls, start, pause
 import time
 import collections
 import random
@@ -13,6 +13,10 @@ class App():
         page_h = 128
         pyxel.init(page_w, page_h, display_scale=scale, capture_scale=scale, title="Snake Game :P", fps=60)
         pyxel.load("assets/resources.pyxres")
+
+        #pause var
+        self.pause_menu = pause.PauseMenu()
+        self.info_pop = pause.InfoPopup()
 
         #menu selection variables
         self.menu_ind = 0
@@ -136,6 +140,17 @@ class App():
             start.start_menu(self)
             return
         
+        #if game paused-
+        if self.cur_game_state ==  labels.GameState.PAUSE:
+            self.pause_menu.draw(self.pause_menu.index)
+            return
+        
+        #info pop up
+        if self.cur_game_state == labels.GameState.INFO:
+            self.info_pop.draw(self.cur_level)
+            return  
+         
+        
         #if game is running
         pyxel.cls(labels.Colour.BLACK)
         self.level.draw()
@@ -153,7 +168,24 @@ class App():
 
         #show game over _ debug
         # pyxel.text(10, 114, str(self.cur_game_state), 12)
-    
+
+
+    def handle_pause(self):
+        choice = self.pause_menu.index
+
+        if choice == 0:
+            self.cur_game_state = labels.GameState.RUNNING
+        elif choice == 1:
+            self.start_new_game()
+        elif choice == 2:
+            self.cur_game_state = labels.GameState.START_MENU
+        elif choice == 3:
+            self.cur_game_state = labels.GameState.INFO
+        elif choice == 4:
+            pyxel.quit()
+
+
+
     #checks all collisions
     def check_collision(self):
         #apple and snakehead intersection

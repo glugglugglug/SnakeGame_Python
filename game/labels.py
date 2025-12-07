@@ -15,6 +15,8 @@ class GameState(enum.Enum):
     RUNNING = 0
     GAME_OVER = 1
     START_MENU = 2
+    PAUSE = 3
+    INFO = 4
 
 
 #colour labels
