@@ -4,15 +4,17 @@ from game import labels
 
 #stores data for each level
 class LevelData:
-    def __init__(self, tm_id, snake, apple, speed):
+    def __init__(self, tm_id, tm_u, tm_v, snake, apple, speed):
          self.tm = tm_id
+         self.tm_u = tm_u
+         self.tm_v =tm_v
          self.snake = snake
          self.apple = apple
          self.speed = speed
 
 #spreadsheet for level info
 LEVELS = [
-        LevelData(tm_id=0, snake= (0,0), apple= (16,0), speed= 1.5)
+        LevelData(tm_id=0, tm_u =0, tm_v =0, snake= (0,0), apple= (16,0), speed= 1.5)
 ]
 
 #handles the levels of a class
@@ -23,4 +25,4 @@ class Level:
         self.h = 128
 
     def draw(self):
-        pyxel.bltm(0, 0, self.data.tm, 0, 0, self.w, self.h, labels.Colour.BLACK)
+        pyxel.bltm(0, 0, self.data.tm, self.data.tm_u, self.data.tm_v, self.w, self.h, labels.Colour.BLACK)

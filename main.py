@@ -14,6 +14,10 @@ class App():
         pyxel.init(page_w, page_h, display_scale=scale, capture_scale=scale, title="Snake Game :P", fps=60)
         pyxel.load("assets/resources.pyxres")
 
+        #menu selection variables
+        self.menu_ind = 0
+        self.menu_max = 3
+
         #quantifying vars score levels apples etc
         self.score = 0
         self.apples_eaten_this_level = 0

@@ -10,6 +10,14 @@ def check_input(self):
                 self.start_level(2)
             if pyxel.btnp(pyxel.KEY_3):
                 self.start_level(3)
+            if pyxel.btnp(pyxel.KEY_DOWN):
+                self.menu_ind = (self.menu_ind + 1) % self.menu_max
+            if pyxel.btnp(pyxel.KEY_UP):
+                self.menu_ind = (self.menu_ind - 1) % self.menu_max
+            if pyxel.btnp(pyxel.KEY_SPACE):
+                self.start_level(self.menu_ind + 1) 
+
+
             return
         #start new game??
         if self.cur_game_state == labels.GameState.GAME_OVER:
