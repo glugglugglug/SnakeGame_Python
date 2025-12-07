@@ -120,7 +120,6 @@ class App():
         self.score = 0
         self.apples_eaten_this_level = 0
         self.apples_eaten_total = 0
-        self.cur_level = 1
 
 
     def start_level(self, level_num):
@@ -138,7 +137,7 @@ class App():
             return
         
         #if game is running
-        pyxel.cls(labels.Colour.YELLOW)
+        pyxel.cls(labels.Colour.BLACK)
         self.level.draw()
         self.apple.draw()
         
@@ -149,7 +148,7 @@ class App():
         #draw title and other text
         self.hud.draw_title(self.cur_level)
         self.hud.draw_score(self.score)
-        #self.hud.draw_level(self.cur_level)
+        self.hud.draw_level(self.cur_level)
         self.hud.draw_apples(self.apples_eaten_total)
 
         #show game over _ debug

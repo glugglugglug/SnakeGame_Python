@@ -53,7 +53,6 @@ def start_menu(self):
     pyxel.rect(self.game_name_x - padding + len(self.game_name) * pyxel.FONT_WIDTH + padding * 2 - 2, self.game_name_y, 2, pyxel.FONT_HEIGHT + padding * 2 , labels.Colour.MID_BLUE)
     pyxel.text(self.game_name_x, self.game_name_y + padding, self.game_name, labels.Colour.WHITE)
 
-    #pyxel.text(60, 30, "SNAKE GAME", labels.Colour.BLACK)
 
     #level buttons
 
@@ -68,18 +67,6 @@ def start_menu(self):
     self.first_x = helpers.center_text(self.level_1, self.w) - 17
     self.first_y = helpers.arrange_text_y(self.level_1, self.h, 8) * 3
 
-    """
-    pyxel.rect(self.first_x - padding, self.first_y, len("1") * pyxel.FONT_WIDTH + padding * 2 + 2, pyxel.FONT_HEIGHT + padding * 2, back_col)
-    #shadow for box
-    if self.menu_ind == 0:
-        pyxel.rect(self.first_x - padding, self.first_y + pyxel.FONT_HEIGHT + padding * 2 - 2, len("1") * pyxel.FONT_WIDTH + padding * 2, 2, labels.Colour.WHITE)
-        pyxel.rect(self.first_x - padding + len("1") * pyxel.FONT_WIDTH + padding * 2 - 2 + 2, self.first_y, 2, pyxel.FONT_HEIGHT + padding * 2, labels.Colour.WHITE)
-    else:
-        pyxel.rect(self.first_x - padding, self.first_y + pyxel.FONT_HEIGHT + padding * 2 - 2, len("1") * pyxel.FONT_WIDTH + padding * 2, 2, shadow_col)
-        pyxel.rect(self.first_x - padding + len("1") * pyxel.FONT_WIDTH + padding * 2 - 2 + 2, self.first_y, 2, pyxel.FONT_HEIGHT + padding * 2, shadow_col)
-    pyxel.text(self.first_x + 1, self.first_y + padding, "1", text_col)
-    """
-
     draw_2boxtext(self, self.level_1, 1, padding, shadow_col, back_col, text_col)
 
     #second button</3
@@ -91,8 +78,3 @@ def start_menu(self):
     self.first_y += self.space_bw_y
 
     draw_2boxtext(self, self.level_3, 3, padding, shadow_col, back_col, text_col)
-
-
-    #pyxel.text(70, 60, "1 - LEVEL 1", pyxel.COLOR_WHITE)
-    #pyxel.text(70, 75, "2 - LEVEL 2", pyxel.COLOR_WHITE)
-    #pyxel.text(70, 90, "3 - LEVEL 3", pyxel.COLOR_WHITE)
