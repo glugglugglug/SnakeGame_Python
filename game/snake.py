@@ -45,35 +45,37 @@ class SnakeSec:
                 #by making the value negative, draw func will draw it flipped
                 height *= -1
         elif self.is_Ladder == True:
-            if self.prev_dir != self.next_dir:
+            if self.prev_dir != None and self.next_dir != None and self.prev_dir != self.next_dir:
                 sprite_x, sprite_y = 16, 16
                 if (self.prev_dir == labels.Direction.RIGHT and self.next_dir == labels.Direction.DOWN) or \
                     (self.prev_dir == labels.Direction.UP and self.next_dir == labels.Direction.LEFT):
-                    print(1)
                     sprite_x += 8
                     sprite_y += 0
                 if (self.prev_dir == labels.Direction.LEFT and self.next_dir == labels.Direction.DOWN) or \
                     (self.prev_dir == labels.Direction.UP and self.next_dir == labels.Direction.RIGHT):
-                    print(2)
                     sprite_x += 0
                     sprite_y += 0
                 if (self.prev_dir == labels.Direction.RIGHT and self.next_dir == labels.Direction.UP) or \
                     (self.prev_dir == labels.Direction.DOWN and self.next_dir == labels.Direction.LEFT):
-                    print(3)
                     sprite_x += 8
                     sprite_y += 8
                 if (self.prev_dir == labels.Direction.LEFT and self.next_dir == labels.Direction.UP) or \
                     (self.prev_dir == labels.Direction.DOWN and self.next_dir == labels.Direction.RIGHT):
-                    print(4)
                     sprite_x += 0
                     sprite_y += 8
-                
-            elif direction == labels.Direction.DOWN:
+            else:
+                if self.prev_dir == labels.Direction.UP or self.prev_dir == labels.Direction.DOWN:
+                    sprite_x += 8
+                    sprite_y += 8
+                if self.prev_dir == labels.Direction.RIGHT or self.prev_dir == labels.Direction.LEFT:
+                    sprite_x += 0
+                    sprite_y += 0   
+            """ elif direction == labels.Direction.DOWN:
                 sprite_x += 8
                 sprite_y += 8
             elif direction == labels.Direction.UP:
                 sprite_x += 8
-                sprite_y += 8
+                sprite_y += 8 """
 
     
         print(sprite_x, sprite_y)
