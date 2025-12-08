@@ -98,9 +98,9 @@ class App():
         self.snake.clear()
 
         #Add the initial snake sections again
-        self.snake.append(snake.SnakeSec(32, 32, self.level_data.snake, is_head = True))
-        self.snake.append(snake.SnakeSec(24, 32, self.level_data.snake))
-        self.snake.append(snake.SnakeSec(16, 32, self.level_data.snake))
+        self.snake.append(snake.SnakeSec(32, 32, self.sprite_snake, is_head = True))
+        self.snake.append(snake.SnakeSec(24, 32, self.sprite_snake))
+        self.snake.append(snake.SnakeSec(16, 32,self.sprite_snake))
 
         #setting direction of snake
         self.snake_direction: labels.Direction = labels.Direction.RIGHT
@@ -130,8 +130,16 @@ class App():
         self.cur_level = level_num
         self.level_data = levels.LEVELS[level_num - 1]
 
+        self.sprite_snake = self.level_data.snake
+        self.sprite_apple = self.level_data.apple
+
+        self.apple.sprite = self.sprite_apple
+
+        self.level = levels.Level(self.level_data)
+
+
         self.start_new_game()
-        self.cur_game_state = labels.GameState.RUNNING
+        self.cur_game_state = labels.GameState.INFO
 
     def draw(self):
         
@@ -150,6 +158,10 @@ class App():
             self.info_pop.draw(self.cur_level)
             return  
          
+        #if game over
+        if self.cur_game_state == labels.GameState.GAME_OVER:
+            self.hud.draw_game_over()
+            return
         
         #if game is running
         pyxel.cls(labels.Colour.BLACK)
@@ -245,7 +257,7 @@ class App():
             self.snake_direction = self.input_queue.popleft()
         #grow snake??
         if self.sec_to_add > 0:
-            self.snake.append(snake.SnakeSec(self.snake[-1].x, self.snake[-1].y, self.level_data.snake))
+            self.snake.append(snake.SnakeSec(self.snake[-1].x, self.snake[-1].y, self.sprite_snake))
             self.sec_to_add -= 1
         # move the head
         prev_loc_x = self.snake[0].x
@@ -269,7 +281,25 @@ class App():
             s.y = prev_loc_y
             prev_loc_x = cur_loc_x
             prev_loc_y = cur_loc_y
+
+        #tracking direction
+        for i in range(len(self.snake)):
+            if i > 0:
+                delta_x = self.snake[i].x - self.snake[i-1].x
+                delta_y = self.snake[i].y - self.snake[i-1].y
+                self.snake[i].prev_dir = self._dir_from_delta(delta_x, delta_y)
+            if i < len(self.snake) -1:
+                delta_x = self.snake[i+1].x - self.snake[i].x
+                delta_y = self.snake[i+1].y - self.snake[i].y
+                self.snake[i].next_dir = self._dir_from_delta(delta_x, delta_y)
+
     
+    def _dir_from_delta(self, dx, dy):
+        if dx > 0: return labels.Direction.RIGHT
+        if dx < 0: return labels.Direction.LEFT
+        if dy > 0: return labels.Direction.DOWN
+        if dy < 0: return labels.Direction.UP
+        return None
     
 
 

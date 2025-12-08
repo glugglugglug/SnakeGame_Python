@@ -4,16 +4,16 @@ from game import labels
 def check_input(self):
         #start menu controls
         if self.cur_game_state == labels.GameState.START_MENU:
-            if pyxel.btnp(pyxel.KEY_DOWN):
+            if pyxel.btnp(pyxel.KEY_DOWN) or pyxel.btnp(pyxel.KEY_S):
                 self.menu_ind = (self.menu_ind + 1) % self.menu_max
-            if pyxel.btnp(pyxel.KEY_UP):
+            if pyxel.btnp(pyxel.KEY_UP) or pyxel.btnp(pyxel.KEY_W):
                 self.menu_ind = (self.menu_ind - 1) % self.menu_max
             if pyxel.btnp(pyxel.KEY_SPACE):
                 self.start_level(self.menu_ind + 1) 
             return
 
         #pause menu controls
-        if pyxel.btnp(pyxel.KEY_P):
+        if pyxel.btnp(pyxel.KEY_P) or pyxel.btnp(pyxel.KEY_BACKSPACE):
             if self.cur_game_state == labels.GameState.RUNNING:
                 self.cur_game_state = labels.GameState.PAUSE
             elif self.cur_game_state == labels.GameState.PAUSE:
@@ -22,9 +22,9 @@ def check_input(self):
 
         #if paused
         if self.cur_game_state == labels.GameState.PAUSE:
-            if pyxel.btnp(pyxel.KEY_DOWN):
+            if pyxel.btnp(pyxel.KEY_DOWN) or pyxel.btnp(pyxel.KEY_S):
                 self.pause_menu.index = (self.pause_menu.index + 1) % len(self.pause_menu.options)
-            if pyxel.btnp(pyxel.KEY_UP):
+            if pyxel.btnp(pyxel.KEY_UP) or pyxel.btnp(pyxel.KEY_W):
                 self.pause_menu.index = (self.pause_menu.index - 1) % len(self.pause_menu.options)
             if pyxel.btnp(pyxel.KEY_SPACE):
                 self.handle_pause()
@@ -33,7 +33,7 @@ def check_input(self):
         #info screen control
         if self.cur_game_state == labels.GameState.INFO:
             if pyxel.btnp(pyxel.KEY_SPACE) or pyxel.btnp(pyxel.KEY_X):
-                self.cur_game_state = labels.GameState.PAUSE
+                self.cur_game_state = labels.GameState.RUNNING
             return
         
         #start new game??

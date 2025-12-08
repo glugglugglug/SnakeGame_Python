@@ -54,10 +54,30 @@ class InfoPopup:
         self.visible = False
 
     def draw(self, level_data):
-        self.margins = 25 
+        self.margins = 20 
         self.width = 192 
         self.height = 128
         self.pop_w = (self.width - 2 * self.margins) 
         self.pop_h = (self.height - 2 * self.margins)
         pyxel.rect(self.margins, self.margins, self.pop_w, self.pop_h, labels.Colour.YELLOW)
-        
+        pyxel.rectb(self.margins, self.margins, self.pop_w, self.pop_h, labels.Colour.ORANGE)
+
+        self.level_info = [
+            "a classic implementation of the\nsnake game, with regular\nsprites and rules.\neat more apples\nto gain a higher score.",
+            "a play on the name of the game\n'snake and ladders'\nalthough it doesn't have\n much to do with it.\nThe walls placed mid scene\n make it harder to consume apples",
+            "a miscallaneous level,\nwith random changes,\n because this is life.\nand life isn't always fair.\ntry your luck at the game of life"
+        ]
+
+        self.text = self.level_info[level_data - 1]
+        lines = self.text.split("\n")
+
+        total_h = len(lines) * (pyxel.FONT_HEIGHT + 2)
+        start_y = self.margins + (self.pop_h - total_h) //2
+
+        self.text_y = start_y
+        for i in lines:
+            self.text_x = self.margins  + helpers.center_text(i,self.pop_w)
+            pyxel.text(self.text_x, self.text_y, i, labels.Colour.WHITE)
+            self.text_y += pyxel.FONT_HEIGHT + 2
+       
+         

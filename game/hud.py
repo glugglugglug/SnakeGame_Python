@@ -1,5 +1,5 @@
 import pyxel
-from game import helpers, levels, start
+from game import helpers, labels, levels, start
 
 
 
@@ -32,7 +32,7 @@ class Hud:
     def draw_score(self, score):
         self.score_text = str(score)
         self.score_text_x = helpers.right_text(self.score_text, 196)
-        pyxel.rect(self.score_text_x - 2, 0, len(self.score_text) * pyxel.FONT_WIDTH +1, pyxel.FONT_HEIGHT +1, 1)
+        pyxel.rect(self.score_text_x - 2, 0, len(self.score_text) * pyxel.FONT_WIDTH +1, pyxel.FONT_HEIGHT +1, labels.Colour.WHITE)
         pyxel.text(self.score_text_x -1, 1, self.score_text, 3)
 
     def draw_level(self, level):
@@ -43,5 +43,14 @@ class Hud:
     def draw_apples(self, apples):
         self.apples_text = "Apples " + str(apples)
         self.apples_text_x = helpers.right_text(self.apples_text, self.page_width)
-        pyxel.rect(self.apples_text_x + 2, 128 - pyxel.FONT_HEIGHT - 2, len(self.apples_text) * pyxel.FONT_WIDTH +1, pyxel.FONT_HEIGHT +1, 1)
+        pyxel.rect(self.apples_text_x + 2, 128 - pyxel.FONT_HEIGHT - 2, len(self.apples_text) * pyxel.FONT_WIDTH +1, pyxel.FONT_HEIGHT +1, labels.Colour.WHITE)
         pyxel.text(self.apples_text_x + 3, 1 + 128 - pyxel.FONT_HEIGHT - 2, self.apples_text, 8)
+        
+    def draw_game_over(self):
+        self.gameover_text = "GAME OVER - SPACE TO START AGAIN"
+        self.margins = 20
+        self.width = 192 - 2 * self.margins
+        self.height = 128 - 2 * self.margins
+        self.gameover_text_x = helpers.center_text(self.gameover_text, self.width) + self.margins
+        self.gameover_text_y = helpers.arrange_text_y(self.gameover_text_x, self.height, 2) + self.margins
+        pyxel.text(self.gameover_text_x, self.gameover_text_y, self.gameover_text, labels.Colour.WHITE)
