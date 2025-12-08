@@ -15,7 +15,7 @@ class LevelData:
 #spreadsheet for level info
 LEVELS = [
         LevelData(tm_id=0, tm_u =0, tm_v =0, snake= (0,0), apple= (16,0), speed= 1.5),
-        LevelData(tm_id=0, tm_u =0, tm_v =0, snake= (0,16), apple= (16,0), speed= 1.5),
+        LevelData(tm_id=0, tm_u =0, tm_v =0, snake= (0,16), apple= (32,16), speed= 1.5),
         LevelData(tm_id=0, tm_u =0, tm_v =0, snake= (0,0), apple= (16,0), speed= 1.5)
 ]
 

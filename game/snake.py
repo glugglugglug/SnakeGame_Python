@@ -67,18 +67,6 @@ class SnakeSec:
                 if self.prev_dir == labels.Direction.UP or self.prev_dir == labels.Direction.DOWN:
                     sprite_x += 8
                     sprite_y += 8
-                if self.prev_dir == labels.Direction.RIGHT or self.prev_dir == labels.Direction.LEFT:
-                    sprite_x += 0
-                    sprite_y += 0   
-            """ elif direction == labels.Direction.DOWN:
-                sprite_x += 8
-                sprite_y += 8
-            elif direction == labels.Direction.UP:
-                sprite_x += 8
-                sprite_y += 8 """
-
-    
-        print(sprite_x, sprite_y)
         
         pyxel.blt(self.x, self.y, 0, sprite_x, sprite_y, width, height, labels.Colour.BLACK)
 
