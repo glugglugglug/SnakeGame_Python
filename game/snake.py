@@ -4,13 +4,14 @@ from game import labels, levels
 #handles drawing parts of the snake, head orientation
 #also checking intersections(crashed into itself)
 class SnakeSec:
-    def __init__(self, x, y, sprite, is_head = False):
+    def __init__(self, x, y, sprite, is_head = False, app = None):
         self.x = x
         self.y = y
         self.w = 8
         self.h = 8
         self.sprite = sprite
         self.is_head = is_head
+        self.app = app
 
         #checking if ladder or not
         self.is_Ladder = False
@@ -20,6 +21,8 @@ class SnakeSec:
         #direction tracking
         self.prev_dir = None
         self.next_dir = None
+
+        
 
     def draw(self, direction):
         # temp value so it can be manipulated
@@ -68,6 +71,28 @@ class SnakeSec:
                     sprite_x += 8
                     sprite_y += 8
         
+        elif self.sprite == levels.LEVELS[2].snake:
+            sprite_e = (sprite_x + 8, sprite_y)
+            sprite_f = (sprite_x, sprite_y + 24)
+            sprite_i = (sprite_x + 8, sprite_y + 16)
+            sprite_l = (sprite_x, sprite_y + 16)
+
+            #testing
+            print(sprite_e)
+            print(sprite_x, sprite_y)
+
+            #checking what was the last thing drawn so i can draw the letter after
+            if self.app.what_i_drew_last == sprite_e:
+                sprite_x, sprite_y = sprite_f
+            elif self.app.what_i_drew_last == sprite_f:
+                sprite_x, sprite_y = sprite_i
+            elif self.app.what_i_drew_last == sprite_i:
+                sprite_x, sprite_y = sprite_l
+            elif self.app.what_i_drew_last == sprite_l:
+                sprite_x, sprite_y = sprite_e
+
+        self.app.what_i_drew_last = (sprite_x, sprite_y)
+        print("womp", self.app.what_i_drew_last)
         pyxel.blt(self.x, self.y, 0, sprite_x, sprite_y, width, height, labels.Colour.BLACK)
 
     def intersects(self, u, v, w, h):

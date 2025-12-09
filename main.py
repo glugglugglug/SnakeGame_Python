@@ -97,10 +97,13 @@ class App():
         self.cur_game_state = labels.GameState.RUNNING
         self.snake.clear()
 
+        self.what_i_drew_last = tuple()
+
         #Add the initial snake sections again
-        self.snake.append(snake.SnakeSec(32, 32, self.sprite_snake, is_head = True))
-        self.snake.append(snake.SnakeSec(24, 32, self.sprite_snake))
-        self.snake.append(snake.SnakeSec(16, 32,self.sprite_snake))
+        self.snake.append(snake.SnakeSec(32, 32, self.sprite_snake, is_head = True, app=self))
+        self.snake.append(snake.SnakeSec(24, 32, self.sprite_snake, app=self))
+        self.snake.append(snake.SnakeSec(16, 32,self.sprite_snake, app=self))
+        self.snake.append(snake.SnakeSec(8,32,self.sprite_snake, app=self))
 
         #setting direction of snake
         self.snake_direction: labels.Direction = labels.Direction.RIGHT
@@ -257,7 +260,7 @@ class App():
             self.snake_direction = self.input_queue.popleft()
         #grow snake??
         if self.sec_to_add > 0:
-            self.snake.append(snake.SnakeSec(self.snake[-1].x, self.snake[-1].y, self.sprite_snake))
+            self.snake.append(snake.SnakeSec(self.snake[-1].x, self.snake[-1].y, self.sprite_snake, app=self))
             self.sec_to_add -= 1
         # move the head
         prev_loc_x = self.snake[0].x
