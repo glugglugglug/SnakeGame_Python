@@ -167,7 +167,7 @@ class App():
             return
         
         #if game is running
-        pyxel.cls(labels.Colour.YELLOW)
+        pyxel.cls(labels.Colour.BLACK)
         self.level.draw()
         self.apple.draw()
         

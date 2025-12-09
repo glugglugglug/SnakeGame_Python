@@ -49,6 +49,7 @@ class SnakeSec:
                 height *= -1
         elif self.is_Ladder == True:
             if self.prev_dir != None and self.next_dir != None and self.prev_dir != self.next_dir:
+                #corner sprites
                 sprite_x, sprite_y = 16, 16
                 if (self.prev_dir == labels.Direction.RIGHT and self.next_dir == labels.Direction.DOWN) or \
                     (self.prev_dir == labels.Direction.UP and self.next_dir == labels.Direction.LEFT):
@@ -72,17 +73,22 @@ class SnakeSec:
                     sprite_y += 8
         
         elif self.sprite == levels.LEVELS[2].snake:
-            sprite_e = (sprite_x + 8, sprite_y)
+            sprite_e_head = (sprite_x + 8, sprite_y)
+            sprite_e = (sprite_x + 8, sprite_y + 24)
             sprite_f = (sprite_x, sprite_y + 24)
             sprite_i = (sprite_x + 8, sprite_y + 16)
             sprite_l = (sprite_x, sprite_y + 16)
 
-            #testing
-            print(sprite_e)
-            print(sprite_x, sprite_y)
+            #for a rotated version
+
+            sprite_e_head_90 = (sprite_x, sprite_y + 8)
+            sprite_e_90 = (sprite_x + 24, sprite_y + 24)
+            sprite_f_90 = (sprite_x + 16, sprite_y + 24)
+            sprite_i_90 = (sprite_x + 24, sprite_y + 16)
+            sprite_l_90 = (sprite_x + 16, sprite_y + 16)
 
             #checking what was the last thing drawn so i can draw the letter after
-            if self.app.what_i_drew_last == sprite_e:
+            if self.app.what_i_drew_last == sprite_e or self.app.what_i_drew_last == sprite_e_head or self.app.what_i_drew_last == sprite_e_head_90:
                 sprite_x, sprite_y = sprite_f
             elif self.app.what_i_drew_last == sprite_f:
                 sprite_x, sprite_y = sprite_i
@@ -91,8 +97,22 @@ class SnakeSec:
             elif self.app.what_i_drew_last == sprite_l:
                 sprite_x, sprite_y = sprite_e
 
+            
+            """
+            #checking what was the last thing drawn so i can draw the letter after
+            if self.app.what_i_drew_last == sprite_e_90 or self.app.what_i_drew_last == sprite_e_head_90:
+                sprite_x, sprite_y = sprite_f_90
+            elif self.app.what_i_drew_last == sprite_f_90:
+                sprite_x, sprite_y = sprite_i_90
+            elif self.app.what_i_drew_last == sprite_i_90:
+                sprite_x, sprite_y = sprite_l_90
+            elif self.app.what_i_drew_last == sprite_l_90:
+                sprite_x, sprite_y = sprite_e_90
+                """
+
+
         self.app.what_i_drew_last = (sprite_x, sprite_y)
-        print("womp", self.app.what_i_drew_last)
+
         pyxel.blt(self.x, self.y, 0, sprite_x, sprite_y, width, height, labels.Colour.BLACK)
 
     def intersects(self, u, v, w, h):
