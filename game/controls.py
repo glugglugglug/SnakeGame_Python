@@ -17,7 +17,7 @@ def check_input(self):
             return
 
         #pause menu controls
-        if pyxel.btnp(pyxel.KEY_P) or pyxel.btnp(pyxel.KEY_BACKSPACE) or pyxel.btn(pyxel.GAMEPAD1_BUTTON_BACK):
+        if pyxel.btnp(pyxel.KEY_P) or pyxel.btnp(pyxel.KEY_BACKSPACE) or pyxel.btn(pyxel.GAMEPAD1_BUTTON_GUIDE):
             if self.cur_game_state == labels.GameState.RUNNING:
                 self.cur_game_state = labels.GameState.PAUSE
             elif self.cur_game_state == labels.GameState.PAUSE:
@@ -38,7 +38,8 @@ def check_input(self):
 
         #info screen control
         if self.cur_game_state == labels.GameState.INFO:
-            if pyxel.btn(pyxel.KEY_SPACE) or pyxel.btn(pyxel.KEY_X) or pyxel.btn(pyxel.GAMEPAD1_BUTTON_BACK) or pyxel.btnp(pyxel.KEY_BACKSPACE):
+            if pyxel.btn(pyxel.KEY_SPACE) or pyxel.btn(pyxel.KEY_X) or \
+                  pyxel.btn(pyxel.GAMEPAD1_BUTTON_GUIDE) or pyxel.btnp(pyxel.KEY_BACKSPACE) or pyxel.btn(pyxel.GAMEPAD1_BUTTON_START) :
                 self.cur_game_state = labels.GameState.RUNNING
             return
         
