@@ -69,6 +69,10 @@ class App():
         self.apples_eaten_this_level = 0
         self.apples_eaten_total = 0
         self.cur_level = 1
+
+        #level 3 randomizing variables
+        self.apple_timeout = random.uniform(4, 9)
+        self.apple_timer = 0
         
         #for input queue - using a deque, pop from front and back - stores direction changes
         self.input_queue = collections.deque()
@@ -92,7 +96,23 @@ class App():
                 self.move_snake()
                 self.check_collision()
                 self.score += len(self.snake) * self.apples_eaten_total + 1
-                
+
+        #for level 3
+        self.apple_timer += self.delta_time
+
+        if self.cur_level == 3:
+            if int(self.apple_timer) >= self.apple_timeout:
+                self.move_apple()
+                self.apple_timer = 0
+                if random.randrange(1,10,1) % 3 == 0:
+                        self.snake.pop()
+                elif random.randrange(1,10,1) % 4 == 0:
+                        self.sec_to_add += random.randrange(1,4,1)
+                elif len(self.snake) > 20 and random.randrange(1,10,1) == 1:
+                        while len(self.snake) > 4:
+                            self.snake.pop()
+
+                        
     def start_new_game(self):
         self.cur_game_state = labels.GameState.RUNNING
         self.snake.clear()
@@ -169,6 +189,7 @@ class App():
         #if game is running
         pyxel.cls(labels.Colour.BLACK)
         self.level.draw()
+        #self.level.get_wall_coords()
         self.apple.draw()
         
         #going through each peice of snake and drawing them
@@ -209,7 +230,8 @@ class App():
             self.sec_to_add += 4
             self.move_apple()
             self.apples_eaten_total += 1
-            self.apples_eaten_this_level += 1
+            self.apples_eaten_this_level += 1                
+
 
         #snakehead into snake intersection
         for s in self.snake:
@@ -227,7 +249,7 @@ class App():
         #tile_value = pyxel.tilemaps[0].pget(tx, ty)  #needed to show value as a tuple ;-;
         #print(f"Snake at ({tx}, {ty}), tile={tile_value}")
 
-        if pyxel.tilemaps[0].pget(self.snake[0].x / 8, self.snake[0].y / 8) == (3,0):
+        if pyxel.tilemaps[self.cur_level - 1].pget(self.snake[0].x / 8, self.snake[0].y / 8) == (3,0):
             self.cur_game_state = labels.GameState.GAME_OVER
 
     def move_apple(self):
@@ -249,6 +271,8 @@ class App():
                     good_posn = False
                     break
             #check for collision w wall 
+            if pyxel.tilemaps[self.cur_level - 1].pget(new_x / 8, new_y / 8) == (3,0):
+                good_posn = False
             
             #if posn is good, move the apple
             if good_posn:
