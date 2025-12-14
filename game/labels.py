@@ -32,3 +32,4 @@ class Colour:
     MID_BLUE = 12
     BROWN = 4
     PEACH = 15
+    FANTA = 2

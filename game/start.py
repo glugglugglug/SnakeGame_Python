@@ -2,7 +2,7 @@ import pyxel
 from game import labels, helpers
 def draw_2boxtext(self, level_name, level_num, padding, shadow_col, back_col, text_col):
 
-    highlight = labels.Colour.WHITE
+    highlight = labels.Colour.MID_BLUE
 
     #number box
     pyxel.rect(self.first_x - padding, self.first_y, len(str(level_num)) * pyxel.FONT_WIDTH + padding * 2 + 2, pyxel.FONT_HEIGHT + padding * 2, back_col)
@@ -10,10 +10,11 @@ def draw_2boxtext(self, level_name, level_num, padding, shadow_col, back_col, te
     if self.menu_ind == level_num -1:
         pyxel.rect(self.first_x - padding, self.first_y + pyxel.FONT_HEIGHT + padding * 2 - 2, len(str(level_num)) * pyxel.FONT_WIDTH + padding * 2, 2, highlight)
         pyxel.rect(self.first_x - padding + len(str(level_num)) * pyxel.FONT_WIDTH + padding * 2 - 2 + 2, self.first_y, 2, pyxel.FONT_HEIGHT + padding * 2, highlight)
+        pyxel.text(self.first_x + 1, self.first_y + padding, str(level_num), highlight)
     else:
         pyxel.rect(self.first_x - padding, self.first_y + pyxel.FONT_HEIGHT + padding * 2 - 2, len(str(level_num)) * pyxel.FONT_WIDTH + padding * 2, 2, shadow_col)
         pyxel.rect(self.first_x - padding + len(str(level_num)) * pyxel.FONT_WIDTH + padding * 2 - 2 + 2, self.first_y, 2, pyxel.FONT_HEIGHT + padding * 2, shadow_col)
-    pyxel.text(self.first_x + 1, self.first_y + padding, str(level_num), text_col)
+        pyxel.text(self.first_x + 1, self.first_y + padding, str(level_num), text_col)
 
 
     #text box
@@ -24,10 +25,11 @@ def draw_2boxtext(self, level_name, level_num, padding, shadow_col, back_col, te
     if self.menu_ind == level_num -1:
         pyxel.rect(self.first_text_x - padding, self.first_y + pyxel.FONT_HEIGHT + padding * 2 - 2, len(level_name) * pyxel.FONT_WIDTH + padding * 2, 2, highlight)
         pyxel.rect(self.first_text_x - padding + len(level_name) * pyxel.FONT_WIDTH + padding * 2 - 2 + 2, self.first_y, 2, pyxel.FONT_HEIGHT + padding * 2, highlight)
+        pyxel.text(self.first_text_x + 1, self.first_y + padding, level_name, highlight)
     else:
          pyxel.rect(self.first_text_x - padding, self.first_y + pyxel.FONT_HEIGHT + padding * 2 - 2, len(level_name) * pyxel.FONT_WIDTH + padding * 2, 2, shadow_col)
          pyxel.rect(self.first_text_x - padding + len(level_name) * pyxel.FONT_WIDTH + padding * 2 - 2 + 2, self.first_y, 2, pyxel.FONT_HEIGHT + padding * 2, shadow_col)
-    pyxel.text(self.first_text_x + 1, self.first_y + padding, level_name, text_col)
+         pyxel.text(self.first_text_x + 1, self.first_y + padding, level_name, text_col)
 
 
 def start_menu(self):
@@ -47,22 +49,26 @@ def start_menu(self):
     self.game_name_y = helpers.arrange_text_y(self.game_name, self.h, 6) 
     
     padding = 5
-    pyxel.rect(self.game_name_x - padding, self.game_name_y, len(self.game_name) * pyxel.FONT_WIDTH + padding * 2, pyxel.FONT_HEIGHT + padding * 2, labels.Colour.LIGHT_BLUE)
+    shadow_col_title = labels.Colour.MID_BLUE
+    back_col_title = labels.Colour.WHITE
+    text_col_title = shadow_col_title
+    pyxel.rect(self.game_name_x - padding, self.game_name_y, len(self.game_name) * pyxel.FONT_WIDTH + padding * 2, pyxel.FONT_HEIGHT + padding * 2, back_col_title)
     #shadow ig
-    pyxel.rect(self.game_name_x - padding, self.game_name_y + pyxel.FONT_HEIGHT + padding * 2 - 2, len(self.game_name) * pyxel.FONT_WIDTH + padding * 2, 2, labels.Colour.MID_BLUE)
-    pyxel.rect(self.game_name_x - padding + len(self.game_name) * pyxel.FONT_WIDTH + padding * 2 - 2, self.game_name_y, 2, pyxel.FONT_HEIGHT + padding * 2 , labels.Colour.MID_BLUE)
-    pyxel.text(self.game_name_x, self.game_name_y + padding, self.game_name, labels.Colour.WHITE)
+    pyxel.rect(self.game_name_x - padding, self.game_name_y + pyxel.FONT_HEIGHT + padding * 2 - 2, len(self.game_name) * pyxel.FONT_WIDTH + padding * 2, 2, shadow_col_title)
+    pyxel.rect(self.game_name_x - padding + len(self.game_name) * pyxel.FONT_WIDTH + padding * 2 - 2, self.game_name_y, 2, pyxel.FONT_HEIGHT + padding * 2 , shadow_col_title)
+    pyxel.text(self.game_name_x, self.game_name_y + padding, self.game_name, text_col_title)
 
 
     #level buttons
-
-    shadow_col = labels.Colour.ORANGE
-    back_col = labels.Colour.YELLOW
-    text_col = labels.Colour.WHITE
+    padding = 5 
+    shadow_col = labels.Colour.BLUE
+    back_col = labels.Colour.WHITE
+    #text_col = labels.Colour.WHITE
+    text_col = shadow_col
     self.space_bw_y = 20
-    self.level_1 = "This is SNAKE"
+    self.level_1 = "This is SNAKE "
     self.level_2 = "This is LADDER"
-    self.level_3 = "This is LIFE"
+    self.level_3 = "This is LIFE  "
 
     self.first_x = helpers.center_text(self.level_1, self.w) - 17
     self.first_y = helpers.arrange_text_y(self.level_1, self.h, 8) * 3
