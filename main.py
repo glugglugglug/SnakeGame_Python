@@ -70,6 +70,9 @@ class App():
         self.apples_eaten_total = 0
         self.cur_level = 1
 
+        #level height esp for level 2
+        self.level_offset_y = self.level_data.tm_v / 8
+
         #level 3 randomizing variables
         self.apple_timeout = random.uniform(4, 9)
         self.apple_timer = 0
@@ -116,6 +119,7 @@ class App():
     def start_new_game(self):
         self.cur_game_state = labels.GameState.RUNNING
         self.snake.clear()
+        
 
         self.what_i_drew_last = tuple()
 
@@ -152,6 +156,7 @@ class App():
     def start_level(self, level_num):
         self.cur_level = level_num
         self.level_data = levels.LEVELS[level_num - 1]
+        self.level_offset_y = self.level_data.tm_v / 8
 
         self.sprite_snake = self.level_data.snake
         self.sprite_apple = self.level_data.apple
@@ -190,7 +195,6 @@ class App():
         pyxel.cls(labels.Colour.BLACK)
         pyxel.bltm(0, 0, 0, 192 * 8, 0, self.page_w, self.page_h)
         self.level.draw()
-        #self.level.get_wall_coords()
         self.apple.draw()
         
         #going through each peice of snake and drawing them
@@ -250,7 +254,7 @@ class App():
         #tile_value = pyxel.tilemaps[0].pget(tx, ty)  #needed to show value as a tuple ;-;
         #print(f"Snake at ({tx}, {ty}), tile={tile_value}")
 
-        if pyxel.tilemaps[self.cur_level - 1].pget(self.snake[0].x / 8, self.snake[0].y / 8) == (3,0):
+        if pyxel.tilemaps[self.cur_level - 1].pget(self.snake[0].x / 8, self.snake[0].y / 8 + self.level_offset_y) == (3,0):
             self.cur_game_state = labels.GameState.GAME_OVER
 
     def move_apple(self):
@@ -259,7 +263,7 @@ class App():
         good_posn = False
         while not good_posn:
             new_x = random.randrange(8, 184, 8)        
-            new_y = random.randrange(8, 120, 8)        
+            new_y = random.randrange(8, 120, 8)    
             good_posn = True
             #check for collision w snake
             for s in self.snake:
@@ -272,7 +276,8 @@ class App():
                     good_posn = False
                     break
             #check for collision w wall 
-            if pyxel.tilemaps[self.cur_level - 1].pget(new_x / 8, new_y / 8) == (3,0):
+            print(self.cur_level)
+            if pyxel.tilemaps[self.cur_level - 1].pget(new_x / 8, new_y / 8 + self.level_offset_y ) == (3,0):
                 good_posn = False
             
             #if posn is good, move the apple

@@ -9,7 +9,7 @@ class Hud:
     def __init__(self):
         self.title_text = "SnakeGame :P"
         self.page_width = 192
-        self.title_text_x = helpers.center_text(self.title_text, self.page_width)
+        self.title_text_x = helpers.center_text(self.title_text, self.page_width) 
         self.score_text = str(0)
         self.score_text_x = helpers.right_text(self.score_text, self.page_width)
         self.level_text = "lvl 0"
@@ -26,7 +26,8 @@ class Hud:
         ]
         self.title_text = levels[level-1]
         self.title_text_x = helpers.center_text(self.title_text, self.page_width)
-        pyxel.rect(self.title_text_x - self.padding, 0, len(self.title_text) * pyxel.FONT_WIDTH +1 + self.padding * 2, pyxel.FONT_HEIGHT +1, labels.Colour.WHITE)
+
+        pyxel.rect(self.title_text_x - self.padding, 0, len(self.title_text) * pyxel.FONT_WIDTH + self.padding * 2, pyxel.FONT_HEIGHT +1, labels.Colour.WHITE)
         pyxel.text(self.title_text_x, 1, self.title_text, labels.Colour.MID_BLUE)
 
     def draw_score(self, score):
