@@ -20,6 +20,7 @@ def check_input(self):
         if pyxel.btnp(pyxel.KEY_P) or pyxel.btnp(pyxel.KEY_BACKSPACE) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_BACK):
             if self.cur_game_state == labels.GameState.RUNNING:
                 self.cur_game_state = labels.GameState.PAUSE
+                self.pause_menu.index = 0
             elif self.cur_game_state == labels.GameState.PAUSE:
                 self.cur_game_state = labels.GameState.RUNNING
             return

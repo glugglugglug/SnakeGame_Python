@@ -32,7 +32,7 @@ class PauseMenu:
 
 
         back_col_text = labels.Colour.WHITE
-        shadow_col = labels.Colour.BLUE
+        shadow_col = labels.Colour.FANTA
         text_col = shadow_col
         for i in self.options:
             self.text = i
@@ -51,11 +51,13 @@ class PauseMenu:
             if selected_ind == self.options.index(i):
                 pyxel.rect(self.text_x - self.padding, self.text_y + pyxel.FONT_HEIGHT + 2, len(self.text) * pyxel.FONT_WIDTH + self.padding * 2 - 2, 1, highlight )
                 pyxel.rect(self.text_x - self.padding + len(self.text) * pyxel.FONT_WIDTH + self.padding * 2 - 2 -1, self.text_y, 1, pyxel.FONT_HEIGHT + 2, highlight )
+                pyxel.text(self.text_x, self.text_y + 2, self.text, highlight)
             else:
                 pyxel.rect(self.text_x - self.padding, self.text_y + pyxel.FONT_HEIGHT + 2, len(self.text) * pyxel.FONT_WIDTH + self.padding * 2 - 2, 1, shadow_col )
                 pyxel.rect(self.text_x - self.padding + len(self.text) * pyxel.FONT_WIDTH + self.padding * 2 - 2 -1, self.text_y, 1, pyxel.FONT_HEIGHT + 2, shadow_col )
+                pyxel.text(self.text_x, self.text_y + 2, self.text, text_col)
             #text
-            pyxel.text(self.text_x, self.text_y + 2, self.text, text_col)
+            
             self.text_y += self.space + 4
 
 class InfoPopup:

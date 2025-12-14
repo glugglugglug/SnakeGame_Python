@@ -9,9 +9,9 @@ class App():
     #constructor of the class
     def __init__(self):
         scale = 3
-        page_w = 192
-        page_h = 128
-        pyxel.init(page_w, page_h, display_scale=scale, capture_scale=scale, title="Snake Game :P", fps=60)
+        self.page_w = 192
+        self.page_h = 128
+        pyxel.init(self.page_w, self.page_h, display_scale=scale, capture_scale=scale, title="Snake Game :P", fps=60)
         pyxel.load("assets/resources.pyxres")
 
         #pause var
@@ -188,6 +188,7 @@ class App():
         
         #if game is running
         pyxel.cls(labels.Colour.BLACK)
+        pyxel.bltm(0, 0, 0, 192 * 8, 0, self.page_w, self.page_h)
         self.level.draw()
         #self.level.get_wall_coords()
         self.apple.draw()
