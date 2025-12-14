@@ -8,7 +8,7 @@ import random
 class App():
     #constructor of the class
     def __init__(self):
-        scale = 4
+        scale = 3
         page_w = 192
         page_h = 128
         pyxel.init(page_w, page_h, display_scale=scale, capture_scale=scale, title="Snake Game :P", fps=60)

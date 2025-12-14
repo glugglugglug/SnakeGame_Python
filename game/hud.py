@@ -53,4 +53,5 @@ class Hud:
         self.height = 128 - 2 * self.margins
         self.gameover_text_x = helpers.center_text(self.gameover_text, self.width) + self.margins
         self.gameover_text_y = helpers.arrange_text_y(self.gameover_text_x, self.height, 2) + self.margins
+        pyxel.rect(self.gameover_text_x -1, self.gameover_text_y -1, len(self.gameover_text) * pyxel.FONT_WIDTH +1, pyxel.FONT_HEIGHT +1, labels.Colour.BLUE)
         pyxel.text(self.gameover_text_x, self.gameover_text_y, self.gameover_text, labels.Colour.WHITE)
